@@ -23,7 +23,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        List<Integer> indexOfNullPosition = new ArrayList<>();
+        List<Integer> indexOfNotNullPosition = new ArrayList<>();
         try (CloseableHttpClient httpClient = HttpClientBuilder.create()
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setConnectTimeout(5000)    // максимальное время ожидание подключения к серверу
@@ -45,16 +45,14 @@ public class Main {
 
                 for (int i = 0; i < resposeList.size(); i++) {
                     Data line = resposeList.get(i);
-                    String t = line.getUpvotes();
-                    if (t == null || t.isEmpty()) {
-                    } else {
-                        indexOfNullPosition.add(i);
+                    int votes = line.getUpvotes();
+                    if (votes != 0) {
+                        indexOfNotNullPosition.add(i);
                     }
                 }
-                for (int i = 0; i < indexOfNullPosition.size(); i++) {
-                    for (int j = 0; j < resposeList.size(); j++) {
-                    }
-                    System.out.println(resposeList.get(indexOfNullPosition.get(i)));
+                for (int i = 0; i < indexOfNotNullPosition.size(); i++) {
+
+                    System.out.println(resposeList.get(indexOfNotNullPosition.get(i)));
                 }
             }
 
